@@ -8,48 +8,55 @@ import java.util.Scanner;
 public class Main {
     public static String textName = "";
     public static boolean run = true;
+
     public static void main(String[] args) throws IOException {
-        logOn();
         fileNamesRead();
-        while(run == true){
+        while (run == true) {
             mainMenu();
         }
     }
-    public static String getBookDetails(){
+
+    public static String getBookDetails() {
         final String delim = ",";
         String bookTitle = getInput("what is the title: ");
         String bookISBN = getInput("enter the ISBN: ");
         String bookAuthor = getInput("enter the Author: ");
         String bookGenre = getInput("enter the genre: ");
-        bookDeets ccccccccc = new bookDeets(bookTitle, bookISBN, bookAuthor, bookGenre);
+        bookDeets c = new bookDeets(bookTitle, bookISBN, bookAuthor, bookGenre);c.setTitle(bookTitle);
+        c.setISBN(bookISBN);c.setAuthor(bookAuthor);c.setGenre(bookGenre);
+        System.out.println(c.getAuthor()+c.getGenre()+c.getISBN()+c.getTitle());
         return (bookTitle + delim + bookISBN + delim + bookAuthor + delim + bookGenre + "\n");
     }
-    public static String getInput(String prompt){
+
+    public static String getInput(String prompt) {
         System.out.println(prompt);
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
-    public static void fileNamesStore(String among){
-        try {
-                FileWriter myWriter = new FileWriter("filenames.txt", false);
-                myWriter.write(among);
-                myWriter.close();
 
-        }  catch (IOException e) {
+    public static void fileNamesStore(String among) {
+        try {
+            FileWriter myWriter = new FileWriter("filenames.txt", false);
+            myWriter.write(among);
+            myWriter.close();
+
+        } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
-    public static void fileNamesRead(){
+
+    public static void fileNamesRead() {
         try {
             BufferedReader br = new BufferedReader(new FileReader("filenames.txt"));
             textName = br.readLine();
             br.close();
-        }  catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
+
     public static void createNewFile(String sussy) {
         try {
             File myObj = new File(sussy + ".txt");
@@ -59,11 +66,12 @@ public class Main {
                 myWriter.close();
                 System.out.println("File created " + myObj.getName());
             }
-        }  catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
+
     public static void createFile(String sussy) {
         try {
             File myObj = new File(sussy);
@@ -73,12 +81,13 @@ public class Main {
                 myWriter.close();
                 System.out.println("File created " + myObj.getName());
             }
-        }  catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
-    public static void writeFile(String deez){
+
+    public static void writeFile(String deez) {
         try {
             FileWriter myWriter = new FileWriter(textName, true);
             myWriter.write(deez);
@@ -89,13 +98,10 @@ public class Main {
             e.printStackTrace();
         }
     }
-    public static void deleteFile() {
-        File myObj = new File(textName);
-        myObj.delete();
-        System.out.println(textName + " has been deleted, bussy");
-    }
+
+
     public static void mainMenu() throws IOException {
-        String userChoice = getInput("do you want to add a book, close the program or delete the text file?\nType 'add' to add a book ,'end' to end the program and 'delete' to delete the file : ");
+        String userChoice = getInput("do you want to add a book, close the program or delete a book?\nType 'add' to add a book ,'end' to end the program and 'delete' to delete a book : ");
         switch(userChoice.toLowerCase(Locale.ROOT)){
             case "end":
                 run = false;
@@ -124,12 +130,9 @@ public class Main {
                 String nuts = getBookDetails();
                 writeFile(nuts);
                 break;
-            case "delete":
-                deleteFile();
-                break;
         }
     }
-    public static void logOn(){
+    /*public static void logOn(){
         try {
             BufferedReader br = new BufferedReader(new FileReader("details.txt"));
             String userName = getInput("enter username");
@@ -142,5 +145,5 @@ public class Main {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-    }
+    }*/
 }

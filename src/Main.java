@@ -2,6 +2,7 @@
 //added main menu and delete option as well as formatting text file a bit
 //added the ability to make new files unfortunately and made an abomination of a logon
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -15,7 +16,13 @@ public class Main {
             mainMenu();
         }
     }
-
+    public static void borowoerDetails(){
+        bookDeets d = new bookDeets("bookTitle", "bookISBN", "bookAuthor", "bookGenre");
+        ArrayList<String> cum = new ArrayList<>();
+        cum.add(d.getTitle());
+        Borowwere borrower = new Borowwere("tes", cum);
+        borrower.setName(getInput("pls name"));
+    }
     public static String getBookDetails() {
         final String delim = ",";
         String bookTitle = getInput("what is the title: ");
@@ -100,13 +107,14 @@ public class Main {
     }
 
 
-    public static void mainMenu() throws IOException {
+    public static void mainMenu() {
         String userChoice = getInput("do you want to add a book, close the program or delete a book?\nType 'add' to add a book ,'end' to end the program and 'delete' to delete a book : ");
         switch(userChoice.toLowerCase(Locale.ROOT)){
             case "end":
                 run = false;
                 break;
             case "add":
+                borowoerDetails();
                 boolean y = true;
                 while(y == true){
                 String x = getInput("do you want to use the same text file or a different one, \ntype 'new' to use a different one and 'same' to use the same one");

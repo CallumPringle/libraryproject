@@ -2,11 +2,12 @@ import java.util.ArrayList;
 public class Borowwere {
     private String name;
     private ArrayList<String> books;
+    private String bookname;
 
-    public Borowwere(String name, ArrayList<String> books) {
+    public Borowwere(String name, ArrayList<String> books, String bookname) {
         this.name = name;
         this.books = books;
-
+        this.bookname = bookname;
     }
 
     public String getName() {
@@ -21,7 +22,7 @@ public class Borowwere {
         return books;
     }
 
-    public void setBooks(ArrayList<String> books) {
-        this.books = books;
+    public void addBooks(String bookname) {
+        books.add(bookname);
     }
 }

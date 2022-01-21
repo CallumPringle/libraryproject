@@ -18,16 +18,16 @@ public class Main {
 
     public static String getBookDetails() { //sets details into the bookDeets class and returns csv values maybe
         final char delim = ',';
+        ArrayList<String> why = new ArrayList<>();
         String bookTitle = getInput("what is the title: ");
         String bookISBN = getInput("enter the ISBN: ");
         String bookAuthor = getInput("enter the Author: ");
         String bookGenre = getInput("enter the genre: ");
-        Borowwere borrower = new Borowwere("", null, "");
+        Borowwere borrower = new Borowwere("", why, "");
         bookDeets c = new bookDeets(bookTitle, bookISBN, bookAuthor, bookGenre);c.setTitle(bookTitle);
         borrower.setName(getInput("waht is your name"));
         borrower.addBooks(bookTitle);
         c.setISBN(bookISBN);c.setAuthor(bookAuthor);c.setGenre(bookGenre);
-        System.out.println(c.getAuthor()+c.getGenre()+c.getISBN()+c.getTitle());
         return (bookTitle + delim + bookISBN + delim + bookAuthor + delim + bookGenre + delim + borrower.getName() + "\n");
     }
 
@@ -59,8 +59,18 @@ public class Main {
             e.printStackTrace();
         }
     }
-
-    public static void createNewFile(String sussy) {
+    public static void viewBooks() {
+        try {
+            Scanner sc = new Scanner(new FileReader(textName));
+            while(sc.hasNextLine()){
+            System.out.println(sc.nextLine());
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+    public static void createNewFile(String sussy) { //why does this exist
         try {
             File myObj = new File(sussy + ".txt");
             if (myObj.createNewFile()) {
@@ -75,12 +85,12 @@ public class Main {
         }
     }
 
-    public static void createFile(String sussy) {
+    public static void createFile(String sussy) { //figure out what this does
         try {
             File myObj = new File(sussy);
             if (myObj.createNewFile()) {
                 FileWriter myWriter = new FileWriter(sussy, false);
-                myWriter.write("Title, ISBN, Author, Genre:\n");
+                myWriter.write("Title, ISBN, Author, Genre, Borrower Name:\n");
                 myWriter.close();
                 System.out.println("File created " + myObj.getName());
             }
@@ -90,7 +100,7 @@ public class Main {
         }
     }
 
-    public static void writeFile(String deez) {
+    public static void writeFile(String deez) { //takes the formatted book details and writes them into the file currently held in textName
         try {
             FileWriter myWriter = new FileWriter(textName, true);
             myWriter.write(deez);
@@ -103,15 +113,18 @@ public class Main {
     }
 
 
-    public static void mainMenu() {
-        String userChoice = getInput("do you want to add a book, close the program or delete a book?\nType 'add' to add a book ,'end' to end the program and 'delete' to delete a book : ");
+    public static void mainMenu() { //  main menu
+        String userChoice = getInput("do you want to add a book, close the program or delete a book?\nType 'add' to add a book ,'end' to end the program and 'delete' to delete a book, 'view' to view all books : ");
         switch(userChoice.toLowerCase(Locale.ROOT)){
             case "end":
                 run = false;
                 break;
+            case "view":
+                viewBooks();
+                break;
             case "add":
                 boolean y = true;
-                while(y == true){
+                while(y == true){//java is lying this is the only way it works dont change it
                 String x = getInput("do you want to use the same text file or a different one, \ntype 'new' to use a different one and 'same' to use the same one");
                 switch (x) {
                     case "same":

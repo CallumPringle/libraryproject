@@ -7,8 +7,10 @@ import java.util.Scanner;
 public class Main {
     public static String textName = "";
     public static boolean run = true;
+    public static boolean amog = false;
 
     public static void main(String[] args) throws IOException {
+        logOn();
         fileNamesRead();
         while (run == true) {
             mainMenu();
@@ -16,19 +18,17 @@ public class Main {
     }
 
 
-    public static String getBookDetails() { //sets details into the bookDeets class and returns csv values maybe
+    public static String getBookDetails() { //sets details into the bookDeets class
         final char delim = ',';
-        ArrayList<String> why = new ArrayList<>();
         String bookTitle = getInput("what is the title: ");
         String bookISBN = getInput("enter the ISBN: ");
         String bookAuthor = getInput("enter the Author: ");
         String bookGenre = getInput("enter the genre: ");
-        Borowwere borrower = new Borowwere("", why, "");
         bookDeets c = new bookDeets(bookTitle, bookISBN, bookAuthor, bookGenre);c.setTitle(bookTitle);
-        borrower.setName(getInput("waht is your name"));
-        borrower.addBooks(bookTitle);
         c.setISBN(bookISBN);c.setAuthor(bookAuthor);c.setGenre(bookGenre);
-        return (bookTitle + delim + bookISBN + delim + bookAuthor + delim + bookGenre + delim + borrower.getName() + "\n");
+        System.out.println(c.toString());//java is lying this isnt redundant
+        return bookTitle;
+       /* return (bookTitle + delim + bookISBN + delim + bookAuthor + delim + bookGenre + delim + borrower.getName() + "\n");*/
     }
 
     public static String getInput(String prompt) { //input function
@@ -143,13 +143,18 @@ public class Main {
                         break;
                 }
                 }
-                String nuts = getBookDetails();
-                writeFile(nuts);
+                if(amog == false) {
+                    ArrayList<String> why = new ArrayList<>();
+                    Borowwere borrower = new Borowwere(getInput("yo what name drilla?"), why, "");
+                    amog = true;
+                }
+                borrower.addBooks(getBookDetails());
+                System.out.println(borrower.toString());
                 break;
         }
     }
-    /*public static void logOn(){
-        try {
+    public static void logOn(){
+        /*try {
             BufferedReader br = new BufferedReader(new FileReader("details.txt"));
             String userName = getInput("enter username");
             String passWord = getInput("enter password");
@@ -159,7 +164,7 @@ public class Main {
             br.close();
         }  catch (IOException e) {
             System.out.println("An error occurred.");
-            e.printStackTrace();
+            e.printStackTrace();*/
         }
-    }*/
-}
+    }
+

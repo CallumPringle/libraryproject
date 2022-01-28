@@ -25,4 +25,13 @@ public class Borowwere {
     public void addBooks(String bookname) {
         books.add(bookname);
     }
+
+    @Override
+    public String toString() {
+        return "Borowwere{" +
+                "name='" + name + '\'' +
+                ", books=" + books +
+                ", bookname='" + bookname + '\'' +
+                '}';
+    }
 }

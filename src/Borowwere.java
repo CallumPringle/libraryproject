@@ -2,12 +2,12 @@ import java.util.ArrayList;
 public class Borowwere {
     private String name;
     private ArrayList<String> books;
-    private String bookname;
 
-    public Borowwere(String name, ArrayList<String> books, String bookname) {
+
+    public Borowwere(String name, ArrayList<String> books) {
         this.name = name;
         this.books = books;
-        this.bookname = bookname;
+
     }
 
     public String getName() {
@@ -22,16 +22,13 @@ public class Borowwere {
         return books;
     }
 
-    public void addBooks(String bookname) {
-        books.add(bookname);
-    }
+
 
     @Override
     public String toString() {
         return "Borowwere{" +
                 "name='" + name + '\'' +
                 ", books=" + books +
-                ", bookname='" + bookname + '\'' +
                 '}';
     }
 }

@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Main {
     public static String textName = "";
     public static boolean run = true;
-    public static boolean amog = false;
+    public static ArrayList<String> imposter = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         logOn();
@@ -26,7 +26,7 @@ public class Main {
         String bookGenre = getInput("enter the genre: ");
         bookDeets c = new bookDeets(bookTitle, bookISBN, bookAuthor, bookGenre);c.setTitle(bookTitle);
         c.setISBN(bookISBN);c.setAuthor(bookAuthor);c.setGenre(bookGenre);
-        System.out.println(c.toString());//java is lying this isnt redundant
+/*        System.out.println(c.toString());//java is lying this isnt redundant*/
         return bookTitle;
        /* return (bookTitle + delim + bookISBN + delim + bookAuthor + delim + bookGenre + delim + borrower.getName() + "\n");*/
     }
@@ -35,6 +35,10 @@ public class Main {
         System.out.println(prompt);
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
+    }
+    public static void setSomething(){
+        Borowwere borrower = new Borowwere(getInput("yo what name drilla?"), imposter);
+        System.out.println(borrower.toString());
     }
 
     public static void fileNamesStore(String among) {
@@ -118,6 +122,7 @@ public class Main {
         switch(userChoice.toLowerCase(Locale.ROOT)){
             case "end":
                 run = false;
+                setSomething();
                 break;
             case "view":
                 viewBooks();
@@ -129,6 +134,7 @@ public class Main {
                 switch (x) {
                     case "same":
                         createFile(textName);
+                        imposter.add(getBookDetails());
                         y = false;
                         break;
                     case "new":
@@ -143,13 +149,6 @@ public class Main {
                         break;
                 }
                 }
-                if(amog == false) {
-                    ArrayList<String> why = new ArrayList<>();
-                    Borowwere borrower = new Borowwere(getInput("yo what name drilla?"), why, "");
-                    amog = true;
-                }
-                borrower.addBooks(getBookDetails());
-                System.out.println(borrower.toString());
                 break;
         }
     }
